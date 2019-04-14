@@ -5,15 +5,17 @@ import java.util.Optional;
 
 public interface WidgetService {
 
-    Widget create(Widget.Patch patch);
+    Widget create(WidgetDto widgetDTO);
 
     Optional<Widget> get(long id);
 
-    Widget update(long id, Widget.Patch patch);
+    Widget update(long id, WidgetDto widgetDTO);
 
     void delete(long id);
 
     Collection<Widget> getAll();
+
+    Collection<Widget> getPartially(int from, int count);
 
     int size();
 }

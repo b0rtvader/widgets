@@ -20,18 +20,22 @@ public class WidgetController {
 
     @GetMapping("/all")
     public Collection<Widget> getAll() {
-        // TODO постраничный вывод ?
         return widgetService.getAll();
     }
 
+    @GetMapping
+    public Collection<Widget> getWidgets(@RequestParam(defaultValue = "0") int offset, @RequestParam(defaultValue = "10") int count) {
+        return widgetService.getPartially(offset, count);
+    }
+
     @PostMapping
-    public Widget create(@RequestBody Widget.Patch patch) {
-        return widgetService.create(patch);
+    public Widget create(@RequestBody WidgetDto widgetDTO) {
+        return widgetService.create(widgetDTO);
     }
 
     @PatchMapping("/{id}")
-    public void update(@PathVariable long id, @RequestBody Widget.Patch patch) {
-        widgetService.update(id, patch);
+    public Widget update(@PathVariable long id, @RequestBody WidgetDto widgetDTO) {
+        return widgetService.update(id, widgetDTO);
     }
 
     @DeleteMapping("/{id}")
